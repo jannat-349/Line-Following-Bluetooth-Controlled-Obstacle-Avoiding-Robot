@@ -73,25 +73,13 @@ void loop() {
       digitalWrite(l2, LOW);
       digitalWrite(r1, LOW);
       digitalWrite(r2, HIGH);
-
+      
     } else if (data == 'S') {
-
       digitalWrite(l1, LOW);
       digitalWrite(r1, LOW);
       digitalWrite(l2, LOW);
       digitalWrite(r2, LOW);
     }
-    //
-    // if (data == '1' || data == '2' || data == '3') {
-    //   analogWrite(ena, 100);
-    //   analogWrite(enb, 100);
-    // } else if (data == '4' || data == '5' || data == '6') {
-    //   analogWrite(ena, 150);
-    //   analogWrite(enb, 150);
-    // } else if (data == '7' || data == '8' || data == '9') {
-    //   analogWrite(ena, 200);
-    //   analogWrite(enb, 200);
-    // }
     float speed;
     int speed1;
     speed = 0.249 * sensorValue;
@@ -99,6 +87,4 @@ void loop() {
     analogWrite(ena, speed1);
     analogWrite(enb, speed1);
   }
-  // Serial.println(speed1);
-  // delay(1000);
 }
