@@ -17,7 +17,50 @@ void setup() {
   pinMode(r2, OUTPUT);
   pinMode(enb, OUTPUT);
 }
-
+void goForward() {
+  digitalWrite(l1, HIGH);
+      digitalWrite(l2, LOW);
+      digitalWrite(r1, LOW);
+      digitalWrite(r2, HIGH);
+}
+void goBackward() {
+digitalWrite(l1, LOW);
+      digitalWrite(l2, HIGH);
+      digitalWrite(r1, HIGH);
+      digitalWrite(r2, LOW);
+}
+void goLeft() {
+  digitalWrite(l1, LOW);
+      digitalWrite(l2, LOW);
+      digitalWrite(r1, LOW);
+      digitalWrite(r2, HIGH);
+      delay(500);
+      digitalWrite(l1, HIGH);
+      digitalWrite(l2, LOW);
+      digitalWrite(r1, LOW);
+      digitalWrite(r2, HIGH);
+}
+void goRight() {
+  digitalWrite(l1, HIGH);
+      digitalWrite(l2, LOW);
+      digitalWrite(r1, LOW);
+      digitalWrite(r2, LOW);
+      delay(500);
+      digitalWrite(l1, HIGH);
+      digitalWrite(l2, LOW);
+      digitalWrite(r1, LOW);
+      digitalWrite(r2, HIGH);
+}
+void goStop() {
+   digitalWrite(l1, LOW);
+      digitalWrite(r1, LOW);
+      digitalWrite(l2, LOW);
+      digitalWrite(r2, LOW);
+}
+void setSpeed(int speed) {
+  analogWrite(ena, speed);
+      analogWrite(enb, speed);
+}
 void loop() {
   // put your main code here, to run repeatedly:
   // analogWrite(ena, 150);
@@ -27,68 +70,32 @@ void loop() {
 
 
     if (data == 'F') {
-      // analogWrite(ena, 150);
-      // analogWrite(enb, 150);
-      digitalWrite(l1, HIGH);
-      digitalWrite(l2, LOW);
-      digitalWrite(r1, LOW);
-      digitalWrite(r2, HIGH);
-
+      goForward();
+      
     } else if (data == 'B') {
-
-      // analogWrite(ena, 150);
-      // analogWrite(enb, 150);
-
-      digitalWrite(l1, LOW);
-      digitalWrite(l2, HIGH);
-      digitalWrite(r1, HIGH);
-      digitalWrite(r2, LOW);
+      goBackward();
 
     } else if (data == 'L') {
-      // analogWrite(ena, 150);
-      // analogWrite(enb, 150);
+      goLeft();
 
-      digitalWrite(l1, LOW);
-      digitalWrite(l2, LOW);
-      digitalWrite(r1, LOW);
-      digitalWrite(r2, HIGH);
-      delay(500);
-      digitalWrite(l1, HIGH);
-      digitalWrite(l2, LOW);
-      digitalWrite(r1, LOW);
-      digitalWrite(r2, HIGH);
+      
 
     } else if (data == 'R') {
-      // analogWrite(ena, 150);
-      // analogWrite(enb, 150);
+      goRight();
 
-      digitalWrite(l1, HIGH);
-      digitalWrite(l2, LOW);
-      digitalWrite(r1, LOW);
-      digitalWrite(r2, LOW);
-      delay(500);
-      digitalWrite(l1, HIGH);
-      digitalWrite(l2, LOW);
-      digitalWrite(r1, LOW);
-      digitalWrite(r2, HIGH);
+      
 
     } else if (data == 'S') {
 
-      digitalWrite(l1, LOW);
-      digitalWrite(r1, LOW);
-      digitalWrite(l2, LOW);
-      digitalWrite(r2, LOW);
+     goStop();
     } 
     //
     if (data == '1' || data == '2' || data == '3') {
-      analogWrite(ena, 100);
-      analogWrite(enb, 100);
+      setSpeed(100);
     } else if (data == '4' || data == '5' || data == '6') {
-      analogWrite(ena, 150);
-      analogWrite(enb, 150);
+      setSpeed(150);
     } else if (data == '7' || data == '8' || data == '9') {
-      analogWrite(ena, 200);
-      analogWrite(enb, 200);
+      setSpeed(200);
     }
   }
 }
