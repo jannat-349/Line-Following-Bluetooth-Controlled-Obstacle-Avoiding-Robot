@@ -1,5 +1,6 @@
 #define trigPin 4
 #define echoPin 3
+#include <stdlib.h>
 int l1 = 5;
 int l2 = 6;
 int r1 = 7;
@@ -34,12 +35,22 @@ void goStop() {
   digitalWrite(r1, LOW);
   digitalWrite(r2, LOW);
 }
+void turnLeft() {
+  digitalWrite(l1, LOW);
+  digitalWrite(l2, LOW);
+  digitalWrite(r1, HIGH);
+  digitalWrite(r2, LOW);
+  delay(100);
+  }
+void turnRight() {
+  digitalWrite(l1, HIGH);
+  digitalWrite(l2, LOW);
+  digitalWrite(r1, LOW);
+  digitalWrite(r2, LOW);
+  delay(100);
+}
 
-// int convertSpeedFromPotentiometer(int analogSpeed) {
-//   int speed;
-//   speed = int(0.249 * analogSpeed);
-//   return speed;
-// }
+
 long calculateTriggerDistance() {
   long duration, distance;
   digitalWrite(trigPin, LOW);
@@ -57,10 +68,12 @@ void setSpeed(int speed) {
   analogWrite(ena, speed);
   analogWrite(enb, speed);
 }
+int generateSide() {
+  
+  long randomSide = random(100) % 2;
+  return randomSide;
+}
 void loop() {
-  //int sensorValue = analogRead(A0);
-  //int speed = convertSpeedFromPotentiometer(sensorValue);
-  //setSpeed(speed);
   long distance = calculateTriggerDistance();
 
   if (distance > 300) {
@@ -74,10 +87,10 @@ void loop() {
     goForward();
   } else {
     goStop();
+    if (generateSide() == 1) {
+      turnLeft();
+    } else {
+      turnRight();
+    }  
   }
-
-  // Serial.print(distance);
-
-  // Serial.println(" cm");
-  // delay(1000);
 }
